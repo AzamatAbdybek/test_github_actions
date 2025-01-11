@@ -1,0 +1,26 @@
+name: Manually Triggered Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'development'
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - run: date
+    windows: windows-latest
+    steps:
+    - run: date
+    maxos:
+    runs-on: macos-latest
+    steps:
+    - run: date
+    depends:
+    needs: [ubuntu, windows, macos]
+    runs-on: macos-latest
+    steps:
+    - run: date
